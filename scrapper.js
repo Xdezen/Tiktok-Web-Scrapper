@@ -36,7 +36,13 @@
                 }
             }
 
-            return { username, likes, views, videoDescription, songName, songAuthor };
+            let hashtags = '';
+            if (videoDescription && videoDescription.includes("#")) {
+                const tags = videoDescription.match(/#[\wçğıöşüÇĞİÖŞÜ]+/g) || [];
+                hashtags = tags.join(', '); 
+            }
+
+            return { username, likes, views, videoDescription, songName, songAuthor, hashtags};
         } else {
             console.log(`I could not find the video with the ${videoId} id.`);
             return null;
@@ -78,7 +84,8 @@
             view: item.views,
             description: item.videoDescription,
             song: item.songName,
-            songAuthor: item.songAuthor
+            songAuthor: item.songAuthor,
+            hashtags: item.hashtags
         };
     });
     
