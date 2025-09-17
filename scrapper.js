@@ -12,7 +12,7 @@
             const likes = likesElement ? likesElement.innerText : 'Not Found';
 
             const videoDescElement = videoContainer.querySelector('img[alt]');
-            const videoDescription = videoDescElement ? videoDescElement.alt : 'Not Found';
+            let videoDescription = videoDescElement ? videoDescElement.alt : 'Not Found';
 
             
             const views = "Not available in Explore";
@@ -21,25 +21,34 @@
             let songName = 'Not Found';
             let songAuthor = 'Not Found';
 
-            if (videoDescription && videoDescription.includes(" with ")) {
-                const parts = videoDescription.split(" with ");
-                if (parts.length > 1) {
-                    const songPart = parts[1];
-                    // SONG NAME
-                    songName = songPart.replace(/’s original sound/i, '').trim();
+            const createdByIndex = videoDescription.toLowerCase().lastIndexOf("created by ");
+            if (createdByIndex !== -1) {
+                const mainCaption = videoDescription.substring(0, createdByIndex).trim();
+                const songPart = videoDescription.substring(createdByIndex);
 
-                    // AUTHOR
-                    const match = songPart.match(/^(.*?)’s/);
+                //Original audio format: "Created by {poster} with {songAuthor}'s original audio"
+                let match = songPart.match(/created by (.*?) with (.*?)’s original audio/i);
+                if (match) {
+                    songAuthor = match[2].trim();  // real audio author
+                    songName = "original audio";
+                } else {
+                // Licensed/custom audio format: "Created by {poster} with {songAuthor}'s {songName}"
+                    match = songPart.match(/created by (.*?) with (.*?)’s (.*)/i);
                     if (match) {
-                        songAuthor = match[1].trim();
+                        songAuthor = match[2].trim();
+                        songName = match[3].trim(); 
                     }
                 }
+
+                videoDescription = mainCaption;
             }
+
 
             let hashtags = '';
             if (videoDescription && videoDescription.includes("#")) {
                 const tags = videoDescription.match(/#[\wçğıöşüÇĞİÖŞÜ]+/g) || [];
                 hashtags = tags.join(', '); 
+                videoDescription = videoDescription.replace(/#[\wçğıöşüÇĞİÖŞÜ]+/g, '').trim();
             }
 
             return { username, likes, views, videoDescription, songName, songAuthor, hashtags};
