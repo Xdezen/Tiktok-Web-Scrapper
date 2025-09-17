@@ -32,7 +32,7 @@ This is the script you run in your browser's console. It's responsible for the d
 
 This is the server-side code that handles the communication between the browser and Google Sheets.
 
-* **POST `/importt-data`**: This is the main endpoint. It listens for incoming data from the browser script. It then uses the `axios` library to make a `POST` request to the Google Apps Script webhook, sending the data and bypassing any CORS errors.
+* **POST `/import-data`**: This is the main endpoint. It listens for incoming data from the browser script. It then uses the `axios` library to make a `POST` request to the Google Apps Script webhook, sending the data and bypassing any CORS errors.
 
 #### **`google_apps_script.js` (Google Apps Script)**
 
