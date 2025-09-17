@@ -1,7 +1,4 @@
 # Tiktok-Web-Scrapper
-
-Claro, aquí tienes un archivo `README.md` que explica las funciones de tu código en inglés, ideal para un repositorio de GitHub.
-
 ---
 
 # TikTok Scraper
