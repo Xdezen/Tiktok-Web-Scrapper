@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const axios = require('axios'); // <-- Ahora importamos axios
+const axios = require('axios');
 
 const app = express();
 const port = 3000;
@@ -19,7 +19,6 @@ app.post('/import-data', async (req, res) => {
   }
 
   try {
-    // Usamos axios para realizar la petición POST
     const response = await axios.post(googleSheetsWebhook, data, {
       headers: {
         'Content-Type': 'application/json'
@@ -36,4 +35,5 @@ app.post('/import-data', async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Proxy running on http://localhost:${port}`);
+
 });
