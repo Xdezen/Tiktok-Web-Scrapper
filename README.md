@@ -3,7 +3,7 @@
 
 # TikTok Scraper
 
-This is a JavaScript scraper designed to extract user data from a TikTok "For You" page and automatically send it to a Google Sheet. The script is intended to be run in the browser's developer console.
+This is a JavaScript scraper designed to extract user data from Tiktok Explorer page and automatically send it to a Google Sheet. The script is intended to be run in the browser's developer console.
 
 ---
 
